@@ -1,0 +1,32 @@
+TOPIC: Free legal aid and getting official documents about your own case
+
+RELEVANT LAWS: Legal Services Authorities Act 1987, Right to Information Act 2005
+
+1. FREE LEGAL AID (Legal Services Authorities Act, 1987)
+   - Every person is entitled to free legal aid if they belong to one of the eligible
+     categories, including (not exhaustive): women, children, persons with disability,
+     members of Scheduled Caste/Scheduled Tribe, victims of trafficking or disaster,
+     industrial workmen, persons in custody, and persons whose annual income is below
+     the limit notified by their State (this limit varies by state, typically in the
+     range of a few lakh rupees per year).
+   - Contact: District Legal Services Authority (DLSA) at your District Court complex,
+     or the State Legal Services Authority (SLSA), or NALSA's helpline (toll-free 15100
+     in most states) for free advocate assignment.
+
+2. GETTING A COPY OF YOUR FIR / CASE DOCUMENTS
+   - Most states now publish FIR copies on the state police website within 24-48 hours
+     of registration (subject to exceptions for sensitive offences).
+   - If not available online, an application under the Right to Information Act, 2005
+     can be filed with the Public Information Officer (PIO) of the police
+     department/court, requesting a certified copy of the FIR, charge-sheet, or any
+     specific document. Response is due within 30 days.
+   - Certified copies can also be obtained directly from the court's copying/record
+     section once the case is registered there, for a nominal fee.
+
+3. TRACKING YOUR CASE
+   - The eCourts portal (services.ecourts.gov.in) lets you search any case by case
+     number, party name, FIR number, or police station, and see the current stage,
+     next hearing date, and orders passed.
+
+DISCLAIMER: General information only. Eligibility limits and portal availability vary by
+state; verify current details with your local DLSA or state police/eCourts website.

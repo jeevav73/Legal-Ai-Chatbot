@@ -1,0 +1,48 @@
+TOPIC: How to file a police complaint, and what to do if police refuse to register an FIR
+
+RELEVANT LAWS: BNSS 2023 (successor to CrPC 1973)
+
+1. FILING AN FIR (First Information Report)
+   - For a cognizable offence, the officer-in-charge of a police station is legally
+     required to register an FIR based on the information given, without first
+     conducting a preliminary inquiry, EXCEPT in a narrow set of situations (e.g.
+     matrimonial/commercial disputes, medical negligence, corruption cases, or cases
+     with abnormal delay) where a preliminary inquiry may be permitted before
+     registration.
+   - The complaint can be given orally (and must be recorded and read back to you) or in
+     writing. You should sign it and get a free copy with the FIR number.
+
+2. IF POLICE REFUSE TO REGISTER AN FIR
+   - Step 1: Send the complaint in writing to the Superintendent of Police (SP)/DCP by
+     registered post or through the police complaint portal of the state, describing the
+     incident and stating that the local station refused to register it.
+   - Step 2: If still no action, approach the Judicial Magistrate under the provision
+     that allows a magistrate to direct police to register an FIR and investigate
+     (successor to Section 156(3) CrPC, now under BNSS), by filing a private complaint
+     application.
+   - Step 3: A writ petition can be filed before the High Court under Article 226 of the
+     Constitution seeking a direction to register the FIR, in serious/urgent cases.
+
+3. ZERO FIR
+   - If the offence occurred outside the jurisdiction of the police station you
+     approached, they must still register a "Zero FIR" and then transfer it to the
+     appropriate police station. Refusal to do so can be escalated the same way as above.
+
+4. DRAFTING A GOOD COMPLAINT (structure to follow)
+   - Complainant's full name, address, contact details, ID proof reference
+   - Date, time, and exact location of the incident
+   - Names/details of the accused (if known), or description if not known
+   - A clear, chronological narration of what happened, in simple factual language
+     (avoid opinions/assumptions — stick to facts and what was witnessed)
+   - Names and contact details of witnesses, if any
+   - List of evidence available (documents, photos, messages, medical reports, CCTV, etc.)
+   - Specific relief/action requested (e.g. "kindly register an FIR and investigate")
+   - Signature and date
+
+5. ESCALATION LADDER SUMMARY
+   Local Police Station -> SP/DCP (written complaint) -> Judicial Magistrate
+   (Sec 156(3)-equivalent application) -> High Court (Article 226 writ petition)
+   -> National/State Human Rights Commission (for rights violations)
+
+DISCLAIMER: General information only; verify current section numbers under BNSS against
+the bare act, and consult an advocate before filing any court application.

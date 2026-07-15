@@ -1,0 +1,59 @@
+TOPIC: Remedies when a false / malicious police case (FIR) is filed against you
+
+RELEVANT LAWS: Bharatiya Nyaya Sanhita (BNS) 2023 [replaces IPC 1860],
+Bharatiya Nagarik Suraksha Sanhita (BNSS) 2023 [replaces CrPC 1973],
+Bharatiya Sakshya Adhiniyam (BSA) 2023 [replaces Evidence Act 1872]
+
+1. IMMEDIATE STEPS IF AN FIR IS FILED AGAINST YOU
+   - You are entitled to a free copy of the FIR. Under BNSS provisions (successor to
+     Section 154(2) CrPC), the police must give the informant/accused a copy of the FIR
+     free of cost.
+   - Check whether the offence is "cognizable" (police can arrest without a warrant) or
+     "non-cognizable" (police need a magistrate's permission to investigate). This
+     determines urgency.
+   - Check whether the offence is "bailable" or "non-bailable" — this determines whether
+     you can get bail directly from the police station/magistrate or need to apply to a
+     Sessions Court / High Court.
+
+2. ANTICIPATORY BAIL
+   - If you believe you may be arrested in a non-bailable case, you may apply for
+     anticipatory bail (successor provision to Section 438 CrPC, now under BNSS) before
+     the Sessions Court or High Court. This prevents arrest while the application is
+     pending/granted, subject to conditions the court sets.
+   - Grounds commonly argued: no direct evidence, false implication due to personal
+     enmity, willingness to cooperate with investigation, no flight risk.
+
+3. QUASHING OF FIR
+   - If the FIR appears to be entirely false, frivolous, or an abuse of process, a
+     petition can be filed before the High Court under its inherent powers (successor
+     provision to Section 482 CrPC, now Section 528 BNSS) to quash the FIR.
+   - Courts generally quash FIRs where: the allegations, even if taken at face value, do
+     not disclose any offence; there is a civil dispute dressed up as a criminal
+     complaint; or there is clear evidence of malice/false implication.
+
+4. COMPLAINT AGAINST MISUSE OF POLICE POWER
+   - A written complaint can be filed with the Superintendent of Police (SP) / DCP
+     against the investigating officer for harassment, non-compliance with arrest
+     procedure safeguards, or failure to follow due process.
+   - A complaint can also be filed with the State/National Human Rights Commission if
+     there is custodial abuse or violation of fundamental rights.
+   - Under BNSS (successor to Section 41A CrPC), for offences punishable with imprisonment
+     of less than 7 years, police must first issue a notice of appearance instead of
+     arresting directly, in most circumstances. Failure to follow this can be challenged.
+
+5. IF THE CASE IS FOUND TO BE FALSE / MALICIOUS
+   - Action can be initiated against the complainant under BNS provisions on giving false
+     information / false evidence with intent to cause injury (successor to Sections
+     182 and 211 IPC) if it is proven the complaint was knowingly false.
+   - A civil suit for damages for malicious prosecution can also be filed, if the
+     original case is dismissed/acquitted and malice + lack of reasonable cause is shown.
+
+6. WHERE TO GET HELP
+   - District Legal Services Authority (DLSA) provides free legal aid to eligible
+     persons (based on income category) — every district has one.
+   - The National/State Legal Services Authority (NALSA/SLSA) helpline can guide on
+     free advocate assignment.
+
+DISCLAIMER: This is general information only. Section numbers under BNS/BNSS/BSA should
+be verified against the current bare act, since renumbering and amendments occur. Always
+consult a practising advocate before filing any petition.
