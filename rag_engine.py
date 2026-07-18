@@ -32,6 +32,23 @@ def get_chroma_collection():
     return _chroma_collection
 
 
+def truncate_context(context_chunks, max_chars=None):
+    max_chars = max_chars or config.MAX_CONTEXT_CHARS
+    selected = []
+    total = 0
+    for chunk, source in context_chunks:
+        entry = f"[Source: {source}]\n{chunk}\n\n"
+        if total + len(entry) > max_chars:
+            remaining = max_chars - total
+            if remaining > 100:
+                truncated_chunk = chunk[: max(0, remaining - len(source) - 20)].rstrip()
+                selected.append((truncated_chunk + "...", source))
+            break
+        selected.append((chunk, source))
+        total += len(entry)
+    return selected
+
+
 def get_llm():
     """Only used when config.INFERENCE_BACKEND == 'transformers' (GPU path)."""
     global _llm_model, _llm_tokenizer
@@ -66,12 +83,28 @@ def get_llm():
     return _llm_model, _llm_tokenizer
 
 
+def _find_ollama_cli() -> str | None:
+    import os
+    import shutil
+
+    ollama_cmd = shutil.which("ollama") or shutil.which("ollama.exe")
+    if ollama_cmd:
+        return ollama_cmd
+
+    local_path = os.path.join(os.getenv("LOCALAPPDATA", ""), "Programs", "Ollama", "ollama.exe")
+    if local_path and os.path.exists(local_path):
+        return local_path
+
+    return None
+
+
 def generate_text(prompt: str, max_new_tokens: int = None) -> str:
     """Single entry point for text generation. Routes to Ollama (CPU) or
     transformers (GPU) depending on config.INFERENCE_BACKEND."""
     max_new_tokens = max_new_tokens or config.MAX_NEW_TOKENS
 
     if config.INFERENCE_BACKEND == "ollama":
+        http_err = None
         try:
             response = requests.post(
                 config.OLLAMA_URL,
@@ -79,57 +112,88 @@ def generate_text(prompt: str, max_new_tokens: int = None) -> str:
                     "model": config.OLLAMA_MODEL,
                     "prompt": prompt,
                     "stream": False,
+                    "keep_alive": config.OLLAMA_KEEP_ALIVE,
                     "options": {
                         "temperature": config.TEMPERATURE,
                         "num_predict": max_new_tokens,
                     },
                 },
-                timeout=30,
+                timeout=config.OLLAMA_HTTP_TIMEOUT,
+                stream=True,
             )
             response.raise_for_status()
-            data = response.json()
-            if isinstance(data, dict) and "response" in data:
-                return data["response"].strip()
-            # Unexpected HTTP response shape — fall back to CLI below
+
+            # Ollama returns NDJSON chunks for streamed responses.
+            import json
+
+            text_parts = []
+            for line in response.iter_lines(decode_unicode=True):
+                if not line:
+                    continue
+                try:
+                    chunk = json.loads(line)
+                except ValueError:
+                    continue
+                if not isinstance(chunk, dict):
+                    continue
+                if chunk.get("done") is True and "response" in chunk:
+                    text_parts.append(chunk.get("response", ""))
+                    break
+                if "response" in chunk:
+                    text_parts.append(chunk["response"])
+
+            joined = "".join(text_parts).strip()
+            if joined:
+                return joined
+
+            raw_text = response.text
+            try:
+                data = json.loads(raw_text)
+            except ValueError:
+                data = raw_text
+            if isinstance(data, dict):
+                if "response" in data:
+                    return data["response"].strip()
+                if "text" in data:
+                    return data["text"].strip()
+                if "output" in data:
+                    return data["output"].strip()
+            elif isinstance(data, str):
+                return data.strip()
             http_err = RuntimeError(f"Unexpected Ollama HTTP response: {data}")
         except Exception as e:
             http_err = e
 
-        # CLI fallback: try running the local `ollama` CLI if the HTTP API fails
+        # CLI fallback: try running the local `ollama` CLI if the HTTP API fails.
         try:
-            import shutil
             import subprocess
-            import os
+            import re
 
-            ollama_cmd = shutil.which("ollama")
-            if not ollama_cmd:
-                # common user install location on Windows
-                local_path = os.path.join(os.getenv("LOCALAPPDATA", ""), "Programs", "Ollama", "ollama.exe")
-                if os.path.exists(local_path):
-                    ollama_cmd = local_path
-
+            ollama_cmd = _find_ollama_cli()
             if not ollama_cmd:
                 raise RuntimeError("Ollama HTTP failed and no Ollama CLI found on PATH or default location.")
 
             proc = subprocess.run(
-                [ollama_cmd, "run", config.OLLAMA_MODEL, prompt],
+                [ollama_cmd, "run", config.OLLAMA_MODEL, *config.OLLAMA_CLI_FLAGS],
+                input=prompt,
                 capture_output=True,
-                text=True,
+                timeout=config.OLLAMA_CLI_TIMEOUT,
                 encoding="utf-8",
                 errors="replace",
-                timeout=180,
             )
             if proc.returncode != 0:
-                raise RuntimeError(f"Ollama CLI failed: {proc.stderr.strip()}")
-            # Strip ANSI / terminal control sequences (e.g. ESC[6D, ESC[K) that
-            # appear when CLI prints progress updates. These show up as
-            # characters like "\x1b[6D" or "\x1b[K" in captured output.
-            import re
+                stderr = (proc.stderr or "").strip()
+                stdout = (proc.stdout or "").strip()
+                raise RuntimeError(
+                    f"Ollama CLI failed (exit {proc.returncode}): {stderr or stdout}"
+                )
 
+            stdout = proc.stdout or ""
             ansi_re = re.compile(r"\x1B[@-_][0-?]*[ -/]*[@-~]")
-            output = proc.stdout
-            output = ansi_re.sub("", output)
-            return output.strip()
+            output = ansi_re.sub("", stdout).strip()
+            if not output:
+                raise RuntimeError("Ollama CLI returned empty output.")
+            return output
         except Exception as e_cli:
             raise RuntimeError(
                 f"Failed to generate text via Ollama HTTP ({http_err}) and CLI fallback ({e_cli})"
@@ -181,9 +245,14 @@ def retrieve_context(question: str, top_k: int = None):
 
 
 def build_prompt(question: str, context_chunks):
-    context_text = "\n\n".join(
-        f"[Source: {source}]\n{chunk}" for chunk, source in context_chunks
-    )
+    truncated_chunks = truncate_context(context_chunks)
+    if truncated_chunks:
+        context_text = "\n\n".join(
+            f"[Source: {source}]\n{chunk}" for chunk, source in truncated_chunks
+        )
+    else:
+        context_text = "No relevant legal context was found. Answer based on the question only."
+
     prompt = (
         f"{config.SYSTEM_INSTRUCTIONS}\n\n"
         f"LEGAL CONTEXT:\n{context_text}\n\n"

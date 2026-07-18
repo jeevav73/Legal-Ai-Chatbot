@@ -41,21 +41,26 @@ LOAD_IN_4BIT = True
 INFERENCE_BACKEND = os.environ.get("INFERENCE_BACKEND", "ollama")
 
 OLLAMA_URL = os.environ.get("OLLAMA_URL", "http://localhost:11434/api/generate")
-OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "llama3.2:3b")
+OLLAMA_MODEL = os.environ.get("OLLAMA_MODEL", "qwen2.5:1.5b")
+OLLAMA_HTTP_TIMEOUT = int(os.environ.get("OLLAMA_HTTP_TIMEOUT", "180"))
+OLLAMA_CLI_TIMEOUT = int(os.environ.get("OLLAMA_CLI_TIMEOUT", "180"))
+OLLAMA_KEEP_ALIVE = os.environ.get("OLLAMA_KEEP_ALIVE", "30m")
+OLLAMA_CLI_FLAGS = ["--hidethinking", "--nowordwrap"]
 
 # ---------------------------------------------------------------------
 # RAG settings
 # ---------------------------------------------------------------------
 CHUNK_SIZE_WORDS = 350
 CHUNK_OVERLAP_WORDS = 50
-TOP_K_RETRIEVAL = 4
+TOP_K_RETRIEVAL = 2
 COLLECTION_NAME = "indian_law_corpus"
 
 # ---------------------------------------------------------------------
 # Generation settings
 # ---------------------------------------------------------------------
-MAX_NEW_TOKENS = 128
+MAX_NEW_TOKENS = 150
 TEMPERATURE = 0.3
+MAX_CONTEXT_CHARS = 1500
 
 SYSTEM_INSTRUCTIONS = """You are Nyaya Sahayak, a legal-information assistant for Indian law.
 Rules you must follow:
@@ -67,4 +72,7 @@ Rules you must follow:
    consult one before taking action or filing anything.
 4. Keep the tone calm, clear, and supportive — many users asking this are
    under real stress (e.g. a case has been filed against them).
+5. NEVER expand or explain abbreviations (BNSS, BNS, BSA, CrPC, IPC) beyond what
+   is explicitly given in the legal context. If unsure of an abbreviation's full
+   form, just use the abbreviation as-is.
 """
