@@ -4,7 +4,7 @@ const initialMessages = [
   {
     role: 'assistant',
     message:
-      'Welcome to RightsGuard. Ask a legal question and I will answer using local legal context and models.',
+      'Welcome to Nyaya Sahayak. Ask a legal question and I will answer using local legal context and models.',
   },
 ];
 
@@ -29,7 +29,7 @@ function ChatTab() {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8000/api/chat', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: trimmed }),

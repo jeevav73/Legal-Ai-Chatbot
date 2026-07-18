@@ -10,7 +10,7 @@ function App() {
     <div className="app-shell">
       <header className="page-header">
         <div>
-          <p className="eyebrow">RightsGuard</p>
+          <p className="eyebrow">Nyaya Sahayak</p>
           <h1>Local legal guidance and complaint drafting</h1>
           <p className="subtitle">
             Ask a legal question or generate a complaint draft using local models and
