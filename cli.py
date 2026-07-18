@@ -1,6 +1,6 @@
 """
 cli.py
-Terminal-only version of Nyaya Sahayak — useful for quick testing without
+Terminal-only version of RightsGuard — useful for quick testing without
 Streamlit, or on machines where you just want to verify the pipeline works.
 
 Run with:
@@ -11,7 +11,7 @@ from rag_engine import answer_question
 
 BANNER = """
 ==================================================
-  Nyaya Sahayak - Indian Law Legal-Aid Chatbot
+  RightsGuard - Indian Law Legal-Aid Chatbot
   (local models only, no external API)
 ==================================================
 Type your legal question, or 'exit' to quit.
@@ -33,7 +33,7 @@ def main():
 
         print("\n(thinking...)")
         result = answer_question(question)
-        print(f"\nNyaya Sahayak: {result['answer']}")
+        print(f"\nRightsGuard: {result['answer']}")
         if result["sources"]:
             print(f"\n[Sources: {', '.join(result['sources'])}]")
 

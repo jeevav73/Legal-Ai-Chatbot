@@ -1,4 +1,4 @@
-# Nyaya Sahayak — Indian Law Legal-Aid Chatbot (Local ML, No API)
+# RightsGuard — Indian Law Legal-Aid Chatbot (Local ML, No API)
 
 A RAG-based (Retrieval-Augmented Generation) chatbot that runs **entirely on open-source
 models** — no Claude/OpenAI API key needed. It:
@@ -145,7 +145,37 @@ python ingest.py
   visible in the UI (already included in `app.py`) and in every generated document
   (already included in `complaint_generator.py`).
 
-## 9. Extending this later
+## 9. Backend + frontend migration
+
+This repository now includes a FastAPI backend and a React frontend while keeping the existing Python RAG logic intact.
+
+### Run the backend
+
+```bash
+cd backend
+uvicorn main:app --reload --port 8000
+```
+
+### Run the frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The React app runs on port 3000 and communicates with the backend at `/api/*`.
+
+### Existing Python logic remains reusable
+
+- `config.py` remains unchanged
+- `ingest.py` remains unchanged
+- `rag_engine.py` remains unchanged
+- `complaint_generator.py` remains unchanged
+
+The new backend imports and wraps the existing functions rather than rewriting core RAG or Ollama logic.
+
+## 10. Extending this later
 
 - Add OCR/PDF ingestion (`pypdf`) so you can drop official PDF bare-acts straight in.
 - Add a rules-based "case classifier" (cognizable/non-cognizable, bailable/non-bailable)

@@ -1,6 +1,6 @@
 """
 app.py
-Streamlit UI for Nyaya Sahayak — a local, no-API Indian legal-aid chatbot.
+Streamlit UI for RightsGuard — a local, no-API Indian legal-aid chatbot.
 
 Run with:
     streamlit run app.py
