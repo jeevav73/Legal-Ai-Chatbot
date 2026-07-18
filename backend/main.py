@@ -48,6 +48,11 @@ class ComplaintDetails(BaseModel):
     relief_requested: str
 
 
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "Nyaya Sahayak backend is running"}
+
+
 @app.get("/api/health")
 def health_check():
     return {"status": "ok"}

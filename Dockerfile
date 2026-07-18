@@ -28,4 +28,4 @@ RUN ollama serve > /tmp/ollama.log 2>&1 & \
 
 EXPOSE 7860
 
-CMD ["bash", "-lc", "ollama serve > /tmp/ollama.log 2>&1 & for i in $(seq 1 60); do if curl -sf http://127.0.0.1:11434/api/tags >/dev/null 2>&1; then break; fi; sleep 2; done; exec uvicorn backend.main:app --host 0.0.0.0 --port 7860"]
+CMD ["sh", "-lc", "ollama serve > /tmp/ollama.log 2>&1 & while ! curl -sf http://127.0.0.1:11434/api/tags >/dev/null 2>&1; do sleep 2; done; exec uvicorn backend.main:app --host 0.0.0.0 --port 7860"]
