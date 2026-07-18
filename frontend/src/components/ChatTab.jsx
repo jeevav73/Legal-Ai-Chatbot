@@ -23,13 +23,15 @@ function ChatTab() {
     const trimmed = question.trim();
     if (!trimmed) return;
 
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
     setError('');
     setMessages((prev) => [...prev, { role: 'user', message: trimmed }]);
     setQuestion('');
     setLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_BASE_URL}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: trimmed }),

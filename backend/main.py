@@ -15,7 +15,10 @@ import complaint_generator
 app = FastAPI(title="RightsGuard Backend")
 
 origins = [
+    "https://jeevav73.github.io",
+    "http://localhost:5173",
     "http://localhost:3000",
+    "http://127.0.0.1:5173",
     "http://127.0.0.1:3000",
 ]
 

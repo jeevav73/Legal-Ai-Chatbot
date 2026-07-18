@@ -1,3 +1,12 @@
+---
+title: Nyaya Sahayak Backend
+emoji: ⚖️
+colorFrom: blue
+colorTo: yellow
+sdk: docker
+pinned: false
+---
+
 # RightsGuard — Indian Law Legal-Aid Chatbot (Local ML, No API)
 
 A RAG-based (Retrieval-Augmented Generation) chatbot that runs **entirely on open-source

@@ -29,6 +29,8 @@ function ComplaintTab() {
     setError('');
     setSuccess('');
 
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
     if (!form.name.trim() || !form.incident_summary.trim()) {
       setError('Please provide your name and a summary of the incident.');
       return;
@@ -36,7 +38,7 @@ function ComplaintTab() {
 
     setLoading(true);
     try {
-      const response = await fetch('/api/complaint', {
+      const response = await fetch(`${API_BASE_URL}/api/complaint`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
