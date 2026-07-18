@@ -45,6 +45,7 @@ body {
   font-size: clamp(2rem, 2.6vw, 2.7rem);
   line-height: 1.05;
   color: #111827;
+  max-width: 720px;
 }
 
 .eyebrow {
@@ -280,8 +281,48 @@ button[type='submit']:hover:not(:disabled) {
 }
 
 @media (max-width: 900px) {
+  .app-shell {
+    padding: 20px 16px 24px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .tab-bar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .tab {
+    width: 100%;
+  }
+
+  .tab-content {
+    padding: 20px;
+  }
+
+  .chat-window {
+    min-height: 320px;
+    padding: 16px;
+  }
+
+  .chat-form {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-form button {
+    width: 100%;
+  }
+
   .grid-two-column {
     grid-template-columns: 1fr;
+  }
+
+  button[type='submit'] {
+    width: 100%;
   }
 }
 
